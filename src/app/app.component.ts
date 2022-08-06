@@ -12,6 +12,7 @@ import { UsersService } from './services/users.service'
 export class AppComponent {
   imgParent = '';
   showImg = true;
+  token = '';
 
   constructor(
     private usersService: UsersService,
@@ -44,7 +45,15 @@ export class AppComponent {
   login() {
     this.authService.login('josemnr@gmail.com','1234')
     .subscribe(rta => {
-      console.log(rta.access_token);
+      console.log(rta)
+      this.token = rta.access_token;
+    })
+  }
+
+  getProfile() {
+    this.authService.profile(this.token)
+    .subscribe(profile => {
+      console.log(profile);
     })
   }
 }
