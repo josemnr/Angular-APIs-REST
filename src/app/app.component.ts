@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from './models/user.model';
 
 import { AuthService } from './services/auth.service'
 import { UsersService } from './services/users.service'
@@ -13,6 +14,7 @@ export class AppComponent {
   imgParent = '';
   showImg = true;
   token = '';
+  profile: User | null = null;
 
   constructor(
     private usersService: UsersService,
@@ -43,17 +45,16 @@ export class AppComponent {
   }
 
   login() {
-    this.authService.login('josemnr@gmail.com','1234')
-    .subscribe(rta => {
-      console.log(rta)
-      this.token = rta.access_token;
-    })
+    this.authService.loginAndGet('maninari97@gmail.com', '1234')
+    .subscribe(user => {
+      this.profile = user;
+    });
   }
 
   getProfile() {
-    this.authService.profile(this.token)
-    .subscribe(profile => {
-      console.log(profile);
+    this.authService.getProfile()
+    .subscribe(user => {
+      this.profile = user;
     })
   }
 }
