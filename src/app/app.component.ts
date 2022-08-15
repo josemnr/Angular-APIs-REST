@@ -45,7 +45,7 @@ export class AppComponent {
   }
 
   login() {
-    this.authService.loginAndGet('maninari97@gmail.com', '1234')
+    this.authService.loginAndGet('josemnr@gmail.com', '1234')
     .subscribe(user => {
       this.profile = user;
     });

@@ -25,12 +25,15 @@ export class AuthService {
     );
   }
 
+  // Forma de utilizar headers con HttpHeaders:
   profile(token: string) {
-    // Forma de utilizar headers con HttpHeaders
-    // const headers = new HttpHeaders();
-    // headers.set('Authorization', `Bearer ${token}`);
-    // ----------------------------------------------------
-    // Forma de utilizar headers como objeto
+    const headers = new HttpHeaders();
+    headers.set('Authorization', `Bearer ${token}`);
+    return this.http.get<User>(`${this.apiUrl}/profile`, {headers});
+  }
+
+  // Forma de utilizar headers como objeto:
+  profile2(token: string) {
     return this.http.get<User>(`${this.apiUrl}/profile`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -39,11 +42,13 @@ export class AuthService {
     });
   }
 
+  // Obtener profile con token enviado dede un interceptor:
   getProfile() {
     return this.http.get<User>(`${this.apiUrl}/profile`, {
     });
   }
 
+  // Hacer login y obtener perfil con switchMap
   loginAndGet(email: string, password: string) {
     return this.login(email, password)
     .pipe(
