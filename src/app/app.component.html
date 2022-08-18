@@ -2,6 +2,17 @@
 <button (click)="createUser()">Create user</button>
 <button (click)="login()">Login</button>
 <button (click)="getProfile()">Get profile</button>
+<!-- Descargar un archivo local: -->
+<!-- <p>
+    <a href="./../assets/files/texto.txt" download>Descargar</a>
+</p> -->
+<p>
+    <button (click)="downloadPdf()">Descargar PDF</button>
+</p>
+<p>
+    <input type="file" (change)="onUpload($event)">
+    <img *ngIf="imgRta" [src]="imgRta" alt="">
+</p>
 <hr>
 <app-products></app-products>
 <!-- <p><input type="text" [(ngModel)]="imgParent" /></p>
